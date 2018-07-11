@@ -1,11 +1,11 @@
 package lexer
 
 import (
-	"testing"
 	"io/ioutil"
+	"testing"
 
-	requir "github.com/stretchr/testify/require"
 	asst "github.com/stretchr/testify/assert"
+	requir "github.com/stretchr/testify/require"
 )
 
 func TestScanner_Scan(t *testing.T) {

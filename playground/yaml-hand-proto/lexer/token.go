@@ -19,6 +19,7 @@ const (
 	DEDENT
 	COLON
 	STRING
+	NUMBER
 )
 
 var tokenTypes = []string{
@@ -29,6 +30,7 @@ var tokenTypes = []string{
 	"DEDENT",
 	"COLON",
 	"STRING",
+	"NUMBER",
 }
 
 func (tt TokenType) String() string {
