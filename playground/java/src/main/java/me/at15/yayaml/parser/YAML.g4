@@ -1,6 +1,10 @@
 grammar YAML;
 
 // TODO: not working, just copied from RCL, not handling any indent
+
+// FIXME: change to virual token ?...
+//tokens { INDENT, DEDENT }
+
 // start of parser
 pair
     : k=ID ':' value
@@ -12,6 +16,11 @@ value
     | INT     #ValInt // TODO: negative number
     | DOUBLE  #ValDouble
     | STRING  #ValString
+    | obj     #ValObj
+    ;
+
+obj
+    : NEWLINE INDENT pair DEDENT
     ;
 
 // start of lexer
@@ -36,6 +45,10 @@ STRING
 ID
     : [a-z] ID_LETTER*
     ;
+
+// FIXME: change to virual token ?... also white space is not handled
+INDENT: '{';
+DEDENT: '}';
 
 fragment DIGIT
     : [0-9]

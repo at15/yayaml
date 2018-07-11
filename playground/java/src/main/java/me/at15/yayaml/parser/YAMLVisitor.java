@@ -1,5 +1,5 @@
-// Generated from src/main/java/me/at15/yayaml/YAML.g4 by ANTLR 4.7.1
-package me.at15.yayaml;
+// Generated from src/main/java/me/at15/yayaml/parser/YAML.g4 by ANTLR 4.7.1
+package me.at15.yayaml.parser;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -44,4 +44,17 @@ public interface YAMLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitValString(YAMLParser.ValStringContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ValObj}
+	 * labeled alternative in {@link YAMLParser#value}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitValObj(YAMLParser.ValObjContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link YAMLParser#obj}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitObj(YAMLParser.ObjContext ctx);
 }

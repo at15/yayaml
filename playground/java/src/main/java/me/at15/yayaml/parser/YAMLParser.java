@@ -1,5 +1,5 @@
-// Generated from src/main/java/me/at15/yayaml/YAML.g4 by ANTLR 4.7.1
-package me.at15.yayaml;
+// Generated from src/main/java/me/at15/yayaml/parser/YAML.g4 by ANTLR 4.7.1
+package me.at15.yayaml.parser;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -17,18 +17,19 @@ public class YAMLParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, BOOL=2, INT=3, DOUBLE=4, STRING=5, ID=6, NEWLINE=7;
+		T__0=1, BOOL=2, INT=3, DOUBLE=4, STRING=5, ID=6, INDENT=7, DEDENT=8, NEWLINE=9;
 	public static final int
-		RULE_pair = 0, RULE_value = 1;
+		RULE_pair = 0, RULE_value = 1, RULE_obj = 2;
 	public static final String[] ruleNames = {
-		"pair", "value"
+		"pair", "value", "obj"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "':'"
+		null, "':'", null, null, null, null, null, "'{'", "'}'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, null, "BOOL", "INT", "DOUBLE", "STRING", "ID", "NEWLINE"
+		null, null, "BOOL", "INT", "DOUBLE", "STRING", "ID", "INDENT", "DEDENT", 
+		"NEWLINE"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -101,28 +102,28 @@ public class YAMLParser extends Parser {
 		PairContext _localctx = new PairContext(_ctx, getState());
 		enterRule(_localctx, 0, RULE_pair);
 		try {
-			setState(10);
+			setState(12);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case ID:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(4);
-				((PairContext)_localctx).k = match(ID);
-				setState(5);
-				match(T__0);
 				setState(6);
+				((PairContext)_localctx).k = match(ID);
+				setState(7);
+				match(T__0);
+				setState(8);
 				value();
 				}
 				break;
 			case STRING:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(7);
-				((PairContext)_localctx).k = match(STRING);
-				setState(8);
-				match(T__0);
 				setState(9);
+				((PairContext)_localctx).k = match(STRING);
+				setState(10);
+				match(T__0);
+				setState(11);
 				value();
 				}
 				break;
@@ -188,19 +189,30 @@ public class YAMLParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	public static class ValObjContext extends ValueContext {
+		public ObjContext obj() {
+			return getRuleContext(ObjContext.class,0);
+		}
+		public ValObjContext(ValueContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof YAMLVisitor ) return ((YAMLVisitor<? extends T>)visitor).visitValObj(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 
 	public final ValueContext value() throws RecognitionException {
 		ValueContext _localctx = new ValueContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_value);
 		try {
-			setState(16);
+			setState(19);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case BOOL:
 				_localctx = new ValBoolContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(12);
+				setState(14);
 				match(BOOL);
 				}
 				break;
@@ -208,7 +220,7 @@ public class YAMLParser extends Parser {
 				_localctx = new ValIntContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(13);
+				setState(15);
 				match(INT);
 				}
 				break;
@@ -216,7 +228,7 @@ public class YAMLParser extends Parser {
 				_localctx = new ValDoubleContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(14);
+				setState(16);
 				match(DOUBLE);
 				}
 				break;
@@ -224,8 +236,16 @@ public class YAMLParser extends Parser {
 				_localctx = new ValStringContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(15);
+				setState(17);
 				match(STRING);
+				}
+				break;
+			case NEWLINE:
+				_localctx = new ValObjContext(_localctx);
+				enterOuterAlt(_localctx, 5);
+				{
+				setState(18);
+				obj();
 				}
 				break;
 			default:
@@ -243,14 +263,61 @@ public class YAMLParser extends Parser {
 		return _localctx;
 	}
 
+	public static class ObjContext extends ParserRuleContext {
+		public TerminalNode NEWLINE() { return getToken(YAMLParser.NEWLINE, 0); }
+		public TerminalNode INDENT() { return getToken(YAMLParser.INDENT, 0); }
+		public PairContext pair() {
+			return getRuleContext(PairContext.class,0);
+		}
+		public TerminalNode DEDENT() { return getToken(YAMLParser.DEDENT, 0); }
+		public ObjContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_obj; }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof YAMLVisitor ) return ((YAMLVisitor<? extends T>)visitor).visitObj(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final ObjContext obj() throws RecognitionException {
+		ObjContext _localctx = new ObjContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_obj);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(21);
+			match(NEWLINE);
+			setState(22);
+			match(INDENT);
+			setState(23);
+			pair();
+			setState(24);
+			match(DEDENT);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\t\25\4\2\t\2\4\3"+
-		"\t\3\3\2\3\2\3\2\3\2\3\2\3\2\5\2\r\n\2\3\3\3\3\3\3\3\3\5\3\23\n\3\3\3"+
-		"\2\2\4\2\4\2\2\2\26\2\f\3\2\2\2\4\22\3\2\2\2\6\7\7\b\2\2\7\b\7\3\2\2\b"+
-		"\r\5\4\3\2\t\n\7\7\2\2\n\13\7\3\2\2\13\r\5\4\3\2\f\6\3\2\2\2\f\t\3\2\2"+
-		"\2\r\3\3\2\2\2\16\23\7\4\2\2\17\23\7\5\2\2\20\23\7\6\2\2\21\23\7\7\2\2"+
-		"\22\16\3\2\2\2\22\17\3\2\2\2\22\20\3\2\2\2\22\21\3\2\2\2\23\5\3\2\2\2"+
-		"\4\f\22";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\13\35\4\2\t\2\4\3"+
+		"\t\3\4\4\t\4\3\2\3\2\3\2\3\2\3\2\3\2\5\2\17\n\2\3\3\3\3\3\3\3\3\3\3\5"+
+		"\3\26\n\3\3\4\3\4\3\4\3\4\3\4\3\4\2\2\5\2\4\6\2\2\2\36\2\16\3\2\2\2\4"+
+		"\25\3\2\2\2\6\27\3\2\2\2\b\t\7\b\2\2\t\n\7\3\2\2\n\17\5\4\3\2\13\f\7\7"+
+		"\2\2\f\r\7\3\2\2\r\17\5\4\3\2\16\b\3\2\2\2\16\13\3\2\2\2\17\3\3\2\2\2"+
+		"\20\26\7\4\2\2\21\26\7\5\2\2\22\26\7\6\2\2\23\26\7\7\2\2\24\26\5\6\4\2"+
+		"\25\20\3\2\2\2\25\21\3\2\2\2\25\22\3\2\2\2\25\23\3\2\2\2\25\24\3\2\2\2"+
+		"\26\5\3\2\2\2\27\30\7\13\2\2\30\31\7\t\2\2\31\32\5\2\2\2\32\33\7\n\2\2"+
+		"\33\7\3\2\2\2\4\16\25";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

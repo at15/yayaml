@@ -1,5 +1,5 @@
-// Generated from src/main/java/me/at15/yayaml/YAML.g4 by ANTLR 4.7.1
-package me.at15.yayaml;
+// Generated from src/main/java/me/at15/yayaml/parser/YAML.g4 by ANTLR 4.7.1
+package me.at15.yayaml.parser;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -46,4 +46,18 @@ public class YAMLBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements Y
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitValString(YAMLParser.ValStringContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitValObj(YAMLParser.ValObjContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitObj(YAMLParser.ObjContext ctx) { return visitChildren(ctx); }
 }
